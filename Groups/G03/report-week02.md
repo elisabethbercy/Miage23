@@ -189,6 +189,95 @@ Transcript show: number upperCase; cr.
 
   All infos and details reported here were found by watching MOOC videos on youtube, reading the pdf slides from https://advanced-design-mooc.pharo.org/#module1  http://files.pharo.org/media/pharoCheatSheet.pdf and code snippets from playgroung.
 
+  -----------------------------------------------------
+  ANDRIANIRINARIJAONA Tiana Joelle section
+  ------------
+Dans Pharo, la variable self est similaire à this en Java. Elle permet de faire référence à l’objet en cours d’exécution, offrant ainsi la possibilité de manipuler ses attributs et d’accéder à ses méthodes.
+
+Exemple d’utilisation :
+
+``` pharo
+humain: nom age: age | h |
+h := self class new.
+h nom: nom.
+h age: age.
+^ h
+```
+
+Dans cet exemple, self fait référence à l’instance de la classe, permettant de créer et d’initialiser un nouvel objet.
+
+# Constructeur
+
+Un constructeur permet de créer une instance d’une classe avec des paramètres définis. Voici un exemple de constructeur qui initialise un objet avec un niveau d’étude et un parcours :
+
+
+# Inversion des booléens
+
+L’opérateur not est utilisé pour inverser la valeur d’un booléen. Par exemple :
+``` pharo
+| isStudent |
+isStudent := true.
+(isStudent not) ifFalse: [ 'This person is a student.' ] ifTrue: [ 'This person is not a student.' ].
+```
+
+Le résultat sera : “This person is a student.”
+
+# Envoi de messages et dispatch
+
+Le dispatch désigne la manière dont un objet décide de quelle méthode exécuter en réponse à un message reçu. Par exemple, si vous avez une méthode introduce qui affiche une présentation :
+
+``` pharo
+describeAge: age
+^'Je suis âgé de', age asString, 'ans'.
+```
+
+On peut l’utiliser ainsi :
+
+``` pharo
+| personne |
+personne := Humain new.
+personne describeAge: 25.
+```
+
+Le résultat sera : “Je suis âgé de 25 ans”
+
+# Héritage
+
+L’héritage permet à une sous-classe de bénéficier des méthodes définies dans une superclasse.
+
+Dans un héritage simple, une classe enfant hérite d’une seule classe parente. Par exemple :
+
+``` pharo
+rouler << Voiture
+^ 'La voiture roule'
+```
+
+``` pharo
+| renault |
+renault := rouler new.
+renault rouler.
+```
+
+Le résultat sera : “La voiture roule”
+
+
+# Récursivité
+
+La récursivité est une technique où une méthode s’appelle elle-même pour résoudre un problème. Il y a deux éléments essentiels à comprendre :
+
+Cas de base
+
+Un cas de base termine la récursion. Par exemple, une somme récursive peut être définie ainsi :
+``` pharo
+somme: n
+n = 0 ifTrue: [ ^ 0 ].
+^ n + (self somme: n - 1)
+```
+
+L’appel x somme: 5. renverra 15.
+
+Dans ces exemples, self fait référence à l’objet qui appelle la méthode, tandis que super permet d’accéder aux méthodes définies dans la superclasse.
+
 
 
 
