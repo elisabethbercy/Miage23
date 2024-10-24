@@ -198,3 +198,36 @@ The results from the previous tests worked as expected. They demonstrate how Pha
 
 My kata is “Restrict Legal Moves”. Before I even start working on the kata, I think it's necessary to know more about chess and how to play it, as I've never played it before. I've been watching YouTube videos and asking professional friends about it, and I have some good ideas that will help me get started on the project and be on the same page as everyone else on my team.
 However, I've taken a look at the MyKing class as well as the other pieces classes, as they're the ones who'll be putting the King in danger or defending him. 
+
+-------------------------
+JOELLE SECTION
+--------------------------
+# La différence entre objets et données 
+
+Dans la vidéo, il est souligné que la principale différence est dans la manière dont nous interagissons avec ces éléments. Les données sont des valeurs statiques, comme un chiffre ou une chaîne de caractères. Les objets, en revanche, encapsulent non seulement des données mais aussi des comportements. Un objet est responsable de ses propres actions et de la gestion de ses données internes.
+
+L’un des principaux problèmes est que ces variables introduisent une forte dépendance dans le code. Cela rend difficile la compréhension du programme, car n’importe quelle partie du code peut modifier ces variables, ce qui peut provoquer des bugs difficiles à identifier.
+
+# Mettre en paramètre la variable globale
+
+Refactoriser du code pour passer d’une utilisation de variables globales à une utilisation de paramètres dans les méthodes. L’idée est de rendre la dépendance explicite en passant les valeurs nécessaires comme arguments lors de l’appel d’une méthode. Cela permet de réduire les effets de bord et d’améliorer la clarté et la réutilisabilité du code.
+
+----------
+# Un test sur le kata
+
+targetSquaresLegal: c'est une méthode du pion qui vérifie la  légalité du mouvement demandé en vérifiant d'abord si le pion est blanc ou noir et en fonction le choix de la méthode appelée: up pour les pions blancs comme ils viennent du bas et down pour les pions noirs comme ils viennent du haut. Elle vérifie aussi si la case est vide ou occupé par un pion de couleur différente.
+
+code du test:
+``` pharo
+testTargetSquaresLegal
+	| board pawn targetSquares |
+	board:= MyChessBoard empty.
+	pawn color: Color white.
+	board place: pawn at: 'e2'.
+	targetSquares := pawn 
+	targetSquaresLegal: true.
+	
+	"Vérification de la case vide et un mouvement non legal"
+	self assert: (targetSquares includes: 'e3').
+	self deny: (targetSquares includes: 'e4')
+```
