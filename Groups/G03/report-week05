@@ -1,0 +1,23 @@
+JOELLE
+
+#Correction des tests sur le kata
+J'ai effectué un test pour vérifier le mouvement d'un pion doit pouvoir avancer de deux case si premier mouvement.
+
+``` pharo
+
+testTargetSquaresLegal
+	| pawn board targetSquares |
+	board:= MyChessBoard empty.
+	pawn := MyPawn new.
+	pawn color: Color white.
+	board at:'e2' put: pawn.
+	targetSquares := pawn 
+	targetSquaresLegal: true.
+	
+	"Vérification si avancement de deux cases un mouvement non legal"
+	self assert: ((pawn targetSquaresLegal: true) first name) equals: 'e4'.
+
+```
+
+Le test est Jaune. L'assertion échoue parce qu'actuellement le pion ne peut avancer que d'une case à la fois
+Par TDD, je vais vérifier si le mouvement demandé est le premier que le pion va effectuer pour implementer cette méthode.
