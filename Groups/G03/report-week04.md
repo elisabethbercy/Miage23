@@ -81,4 +81,113 @@ testTargetSquaresLegalWhitePawn
 My test should stop any deviations from the *legal* moves of the PAWNS - the test failed as expecteed, this means the test suite is ok and trustworthy. If the test had passed despite the *legal not * move -the mutation- it would have indicated there're some flaws in the test logic. 
 
 ---
-Bethuel Lafalaise
+
+# Bethuel Lafalaise
+
+## Tests 101
+Testing is the foundation of reliable software. It ensures confidence in the system, especially during changes. A test should create a context, perform an action, and verify the results using assertions.
+- Tests verify that past functionalities still work after changes.
+- They enable future evolution by reducing the fear of change and catching unnoticed bugs.
+- Automation is critical. A unit test must be automated to be valid.
+
+```
+TestCase subclass: #SetTest
+
+SetTest >> testAdd
+   | empty |
+   empty := Set new.
+   empty add: 5. "Stimulus"
+   empty add: 5.
+   self assert: empty size equals: 1.
+```
+
+## Tests
+Tests are like life insurance. They increase trust in your system, reduce fear of change, and support understanding of the code. Automated tests can be reused millions of times to validate behaviors.
+
+Characteristics of Good Tests:
+- Check extreme and complex cases.
+- Provide good coverage of code.
+- Act as active, up-to-date documentation.
+
+```
+TestCase subclass: #ColorTest
+
+ColorTest >> testConvert
+   self assert: Color white convert equals: '#FFFFFF'.
+   self assert: Color black convert equals: '#000000'.
+```
+
+## Test-Driven Development (TDD)
+TDD is a methodology where you write tests first, then code to pass the tests. It encourages clean APIs, solid functionality, and fewer regressions.
+
+How it works ?
+- Write a failing test.
+- Write the code to make it pass.
+- Refactor if needed and rerun all tests.
+
+Summary with Illustrations in Pharo
+Tests 101
+
+Overview: Testing is the foundation of reliable software. It ensures confidence in the system, especially during changes. A test should create a context, perform an action (stimulus), and verify the results using assertions.
+
+Key Concepts:
+
+    Tests verify that past functionalities still work after changes.
+    They enable future evolution by reducing the fear of change and catching unnoticed bugs.
+    Automation is critical. A unit test must be automated to be valid.
+
+Pharo Illustration:
+
+TestCase subclass: #SetTest
+
+SetTest >> testAdd
+   | empty |
+   empty := Set new. "Context"
+   empty add: 5. "Stimulus"
+   empty add: 5.
+   self assert: empty size equals: 1. "Check"
+
+Tests
+
+Why Test?: Tests are like life insurance. They increase trust in your system, reduce fear of change, and support understanding of the code. Automated tests can be reused millions of times to validate behaviors.
+
+Characteristics of Good Tests:
+
+    Check extreme and complex cases.
+    Provide good coverage of code.
+    Act as active, up-to-date documentation.
+
+Pharo Illustration:
+
+TestCase subclass: #ColorTest
+
+ColorTest >> testConvert
+   self assert: Color white convert equals: '#FFFFFF'.
+   self assert: Color black convert equals: '#000000'.
+
+Test-Driven Development (TDD)
+
+Definition: TDD is a methodology where you write tests first, then code to pass the tests. It encourages clean APIs, solid functionality, and fewer regressions.
+
+Flow:
+
+    Write a failing test.
+    Write the code to make it pass.
+    Refactor if needed and rerun all tests.
+
+Pharo Illustration:
+
+TestCase subclass: #CounterTest
+
+CounterTest >> testCount
+   | counter |
+   counter := Counter new.
+   counter count: 10.
+   self assert: counter count equals: 10.
+
+## Xtreme Test-Driven Development (XTDD)
+XTDD enhances TDD by integrating live debugging. Developers can define methods or add instance variables on the fly during testing.
+
+Advantages:
+- Maintains developer flow.
+- Allows interaction with objects directly in the debugger.
