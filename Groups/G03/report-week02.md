@@ -279,15 +279,81 @@ L’appel x somme: 5. renverra 15.
 Dans ces exemples, self fait référence à l’objet qui appelle la méthode, tandis que super permet d’accéder aux méthodes définies dans la superclasse.
 
 
+-----------------------------------------------------
 
+# Bethuel LAFALAISE
 
+## Essence of Dispatch
+Message dispatch in object-oriented programming avoids explicit conditionals by letting the receiver decide how to handle a message. Pharo demonstrates this through Boolean operations (not, or:) implemented across the True and False classes, showcasing dynamic message lookup.
 
+```
+True >> not
+    "Negation −− answer false since the receiver is true."
+    ^ false
 
+False >> not
+    "Negation −− answer true since the receiver is false."
+    ^ true
 
+true not.  "→ false"
+false not. "→ true"
+```
 
+## Inheritance Basics
+Inheritance is a mechanism to reuse and extend code, allowing subclasses to add or specialize behavior and state. Pharo supports single inheritance, where behavior lookup is dynamic, and state inheritance is static, ensuring modular and flexible designs.
 
+```
+Animal >> initializeWithName: aName
+    name := aName.
 
+Animal >> speak
+    ^ 'An animal makes a sound.'
 
+Animal >> description
+    ^ 'I am ', name.
 
+"Subclass: Dog"
+Animal subclass: #Dog
+    instanceVariableNames: ''
 
+Dog >> speak
+    ^ 'Woof!'
 
+"Subclass: Cat"
+Animal subclass: #Cat
+    instanceVariableNames: ''
+
+Cat >> speak
+    ^ 'Meow!'
+
+"Usage"
+dog := Dog new initializeWithName: 'Buddy'.
+cat := Cat new initializeWithName: 'Minou'.
+
+dog description.  "→ 'I am Buddy.'"
+dog speak.        "→ 'Woof!'"
+
+cat description.  "→ 'I am Minou.'"
+cat speak.        "→ 'Meow!'"
+```
+
+## Inheritance and Lookup: Self
+- The self keyword represents the receiver of the current message. During method execution, self ensures that lookup starts in the receiver's class, even when the method originates from a superclass.
+- Lookup dynamically traverses the class hierarchy until it resolves the method.
+
+```
+A >> foo
+    ^ 10
+
+A >> bar
+    ^ self foo
+
+B >> foo
+    ^ 50
+
+aA := A new.
+aB := B new.
+
+aA bar.  "→ 10"
+aB bar.  "→ 50"
+```
